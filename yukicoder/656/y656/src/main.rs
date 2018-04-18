@@ -11,11 +11,19 @@ fn read_line()->Result<String>{
 }
 
 fn main() {
-    let holes = read_line().unwrap().trim();
+    let mut holes = String::new();
+    holes += read_line().unwrap().trim();
     let mut sum:i32 = 0;
     for i in holes.chars(){
         let x = i.to_string();
-        sum += i32::from_str(x).unwrap();
+        let tmp = x.parse::<i32>().unwrap();
+
+        if tmp == 0{
+            sum += 10;
+        }
+        else {
+            sum += tmp;
+        }
     }
-    print!("{}", sum);
+    println!("{}", sum);
 }
