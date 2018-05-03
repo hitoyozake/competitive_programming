@@ -15,15 +15,14 @@ fn fibo(n:i64, map:&mut HashMap<i64, i64>)->i64
     match map.get(&n)
     {
         Some(&number) => {
-            r = number;
+            number
         },
         _ => { 
             let num = fibo(n-1, map) + fibo(n-2, map);
             map.insert(n, num);
-            r = num;
+            num            
         },
     }
-    r   
 }
 
 fn main() {
@@ -38,6 +37,4 @@ fn main() {
 
     println!("{}", num);
 
-
-    
 }
