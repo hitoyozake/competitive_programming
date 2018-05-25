@@ -18,8 +18,24 @@ fn main() {
 
     let v = blocks.split(" ");
 
-    let num_vect: Vec<i32> = Vec::new();
+    let mut num_vect: Vec<i32> = Vec::new();
 
+    for i in v {
+        num_vect.push(i.parse::<i32>().unwrap());
+    }
 
-    println!("Hello, world!");
+    num_vect.sort();
+
+    let mut count = 0;
+    let mut sum = 0;
+
+    for i in num_vect{
+        sum += i;
+
+        if sum <= max {
+            count += 1;
+        }
+    }
+    println!("{}", count);
+
 }
