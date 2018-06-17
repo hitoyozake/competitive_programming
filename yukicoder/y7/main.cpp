@@ -26,9 +26,7 @@ int main()
         if(tmp.size()==0)
             break;
 
-
         int i = tmp[0];
-
         
         primes.push_back(i);
 
