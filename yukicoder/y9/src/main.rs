@@ -58,9 +58,15 @@ fn main() {
     let mut enem_levels: Vec<i32> = Vec::new();
 
     for i in sv{
-        enem_levels.push(i.parse::<i32>().unwrap());
+        enem_levels.push(i.parse::<i32>().unwrap()/2);
     }
 
+    let mut max_count_min = 1000000;
+
+    for i in 0..n{
+        let pt = party.Clone();
+
+    }
     
 
 }
