@@ -21,14 +21,21 @@ struct Monster{
     count: i32
 }
 
+
+impl Clone for Monster{
+    fn clone(&self)->Monster{
+        Monster{level:self.level, count:self.count}
+    }
+}
+
 // BinaryHeapのために実装
 impl Ord for Monster{
     fn cmp(&self, other: &Monster)->Ordering{
-        (self.level, self.count).cmp(&(other.level, other.count))
+        
+        (other.level, other.count).cmp(&(self.level, self.count))
+        //(self.level, self.count).cmp(&(other.level, other.count))
     }
-
 }
-
 
 fn main() {
 
@@ -39,21 +46,21 @@ fn main() {
     let Inches(integer_length) = length;
     let il:Inches = Inches(20);
 
-    let mut heap:BinaryHeap<i32>= BinaryHeap::new();
+    let mut que:BinaryHeap<Monster>= BinaryHeap::new();
 
     let n: i32 = get_line().trim().parse::<i32>().unwrap();
 
     let tmp = String::from(get_line().trim());
-    let sv:Vec<&str> = tmp.split(",").collect();
+    let sv:Vec<&str> = tmp.split(" ").collect();
 
     let mut party: Vec<Monster> = Vec::new();
 
     for i in sv{
-        party.push(Monster{ level:i.parse::<i32>().unwrap(), count: 0});
+        que.push(Monster{ level:i.parse::<i32>().unwrap(), count: 0});
     }
 
     let tmp = String::from(get_line().trim());
-    let sv:Vec<&str> = tmp.split(",").collect();
+    let sv:Vec<&str> = tmp.split(" ").collect();
 
     let mut enem_levels: Vec<i32> = Vec::new();
 
@@ -64,9 +71,28 @@ fn main() {
     let mut max_count_min = 1000000;
 
     for i in 0..n{
-        let pt = party.Clone();
+        let mut pt = que.clone();
+
+        let mut max_count = 0;
+
+        for j in 0..n{
+                let mut selected = pt.pop().unwrap();
+                println!("selected . l:{}, c:{}", selected.level, selected.count);
+                selected.count+=1;
+
+                let usz = ((i+j)%n) as u32;
+
+                selected.level += enem_levels[usz as usize];
+                max_count = std::cmp::max(max_count, selected.count);
+                println!("r . l:{}, c:{}", selected.level, selected.count);
+        
+                pt.push(selected);
+        }
+    
+        max_count_min = std::cmp::min(max_count_min, max_count);
 
     }
     
+    println!("{}", max_count_min);
 
 }
