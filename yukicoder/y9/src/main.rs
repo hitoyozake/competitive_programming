@@ -15,7 +15,7 @@ fn get_line()->String{
 
 use std::cmp::Ordering;
 
-#[derive(Eq, PartialEq, PartialOrd)]
+#[derive(Eq)]
 struct Monster{
     level: i32,
     count: i32
@@ -28,11 +28,34 @@ impl Clone for Monster{
     }
 }
 
+impl PartialOrd for Monster{
+    fn partial_cmp(&self, other: &Monster)->Option<Ordering>{
+        if self.level < other.level
+        {
+            Some(Ordering::Greater)
+        }
+        else if self.level == other.level && self.count <= other.count {
+                Some(Ordering::Greater)
+        }
+        else{
+            Some(Ordering::Less)
+        }
+    }
+}
+
+
+impl PartialEq for Monster{
+    fn eq(&self, other: &Monster)->bool{
+        (self.level, self.count) == (other.level, other.count)
+    }
+
+}
+
 // BinaryHeapのために実装
 impl Ord for Monster{
     fn cmp(&self, other: &Monster)->Ordering{
         
-        (other.level, other.count).cmp(&(self.level, self.count))
+        (self.level, self.count).cmp(&(other.level, other.count))
         //(self.level, self.count).cmp(&(other.level, other.count))
     }
 }
@@ -74,17 +97,17 @@ fn main() {
         let mut pt = que.clone();
 
         let mut max_count = 0;
-
+        //popされた時の値をうまくなるように調整が必要そう
         for j in 0..n{
                 let mut selected = pt.pop().unwrap();
-                println!("selected . l:{}, c:{}", selected.level, selected.count);
+                //println!("selected . l:{}, c:{}", selected.level, selected.count);
                 selected.count+=1;
 
                 let usz = ((i+j)%n) as u32;
 
                 selected.level += enem_levels[usz as usize];
                 max_count = std::cmp::max(max_count, selected.count);
-                println!("r . l:{}, c:{}", selected.level, selected.count);
+                //println!("r . l:{}, c:{}", selected.level, selected.count);
         
                 pt.push(selected);
         }
