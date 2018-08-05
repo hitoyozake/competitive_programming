@@ -12,13 +12,17 @@ fn read_i64()->i64{
 
 
 fn main() {
-    let n = read_i64();
+    let n = read_i64() as i128;
 
-    let mut max:i64 = 0;
+    let mut max:i128 = 0;
+    let nmod:i128 = n;
 
-    for i in 0..n{
-
-        max = std::cmp::max(max, (n-i+ 1)*i + (n-i));
+    for i in nmod/2-100..nmod/2+100{
+        //println!("{}", (n-i+ 1)*i + (n-i));
+        
+        let imod:i128 = i;
+        
+        max = std::cmp::max(max, ((((nmod-imod+1))*(imod)) + (nmod-imod))%1000007);
     
     }
 

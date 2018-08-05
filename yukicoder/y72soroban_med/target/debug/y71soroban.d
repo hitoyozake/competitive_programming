@@ -1,1 +1,1 @@
-/Users/hitoyo/src/compe/yukicoder/y71soroban/target/debug/y71soroban: /Users/hitoyo/src/compe/yukicoder/y71soroban/src/main.rs
+/Users/hitoyo/src/compe/yukicoder/y72soroban_med/target/debug/y71soroban: /Users/hitoyo/src/compe/yukicoder/y72soroban_med/src/main.rs
