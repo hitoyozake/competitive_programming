@@ -5,7 +5,7 @@
 #include <vector>
 
 void print_state(std::vector<int> const & s){
-    std::cout << "print: " << std::endl;
+    //std::cout << "print: " << std::endl;
     for( int i = 0; i < s.size()-1; ++i){
         std::cout << s[i] << ",";
     }
@@ -40,10 +40,10 @@ int main()
     states_q.push(init_state);
     
     bool found = false;
-
+    int counter = 0;
     while(!states_q.empty()){
         std::vector<int> const s = states_q.front();
-
+        std::cout << ++counter << std::endl;
         int t = 1;
         for(int i = 0; i < n; ++i )
         {
@@ -66,10 +66,14 @@ int main()
             for(int i = 0; i < n; ++i)
             {
                 std::cout<<i<<std::endl;
+                int const plus = 0+coins[i]%n;
+                int const minus = n+(0-coins[i])%n-1;
+                std::cout << "plus:" << plus %n << std::endl;
+                std::cout << "minus:" << minus %n << std::endl;
                 std::vector<int> s_copy = s;
-                s_copy[(0 + coins[i])%n] = (int)!(s_copy[(0+coins[i])%n] == 1);
-                s_copy[(0 - coins[i])%n] = (int)!(s_copy[(0-coins[i])%n] == 1);
-                print_state(s_copy);
+                s_copy[(0 + coins[i])%n] = (int)!(s_copy[plus%n] == 1);
+                s_copy[(0 - coins[i])%n] = (int)!(s_copy[minus%n] == 1);
+                //print_state(s_copy);
                 states_q.push(s_copy);
                 
             }
@@ -81,8 +85,6 @@ int main()
             continue;
         }
     }
-
-    std::cout << "endl" << std::endl;
 
     if(found)
         std::cout << "Yes" << std::endl;
