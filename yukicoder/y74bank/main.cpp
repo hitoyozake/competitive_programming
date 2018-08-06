@@ -36,14 +36,13 @@ int main()
     std::queue<std::vector<int>> states_q;
 
     std::set<std::vector<int>> states;
-    states.insert(init_state);
     states_q.push(init_state);
     
     bool found = false;
     int counter = 0;
     while(!states_q.empty()){
+        //std::cout << "start" << std::endl;
         std::vector<int> const s = states_q.front();
-        std::cout << ++counter << std::endl;
         int t = 1;
         for(int i = 0; i < n; ++i )
         {
@@ -57,31 +56,39 @@ int main()
             break;
         }
         
-        auto const r = states.insert(s);
+        //auto const r = states.insert(s);
+        states_q.pop();
+        if(states.find(s)==states.end())
+        {
+            states.insert(s);
         
-        if(r.second==false){
+        //if(r.second){
             //知って�?る盤面ではなかっ�?
             //�?番に盤面を生成してqueueに追�?する
-            
+            std::cout << "********poped State: *******  :  ";
+            print_state(s);
             for(int i = 0; i < n; ++i)
             {
-                std::cout<<i<<std::endl;
-                int const plus = 0+coins[i]%n;
-                int const minus = n+(0-coins[i])%n-1;
+                int const plus = (i+coins[i])%n;
+                int const minus = n + (i-coins[i])%n-1;
                 std::cout << "plus:" << plus %n << std::endl;
                 std::cout << "minus:" << minus %n << std::endl;
                 std::vector<int> s_copy = s;
-                s_copy[(0 + coins[i])%n] = (int)!(s_copy[plus%n] == 1);
-                s_copy[(0 - coins[i])%n] = (int)!(s_copy[minus%n] == 1);
-                //print_state(s_copy);
+                //std::vector<int> s_copy(n, 0);
+                
+                s_copy[plus%n] = (int)!(s_copy[plus] == 1);
+                if(plus!=minus)
+                    s_copy[minus] = (int)!(s_copy[minus] == 1);
+                print_state(s_copy);
                 states_q.push(s_copy);
                 
+                //std::cout << "*******" << i << "************" << std::endl;
+                
             }
-            states_q.pop();
+            //std::cout << "end" << std::endl;
         }
         else
         {
-            states_q.pop();
             continue;
         }
     }
