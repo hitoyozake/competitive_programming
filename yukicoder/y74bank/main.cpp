@@ -65,21 +65,21 @@ int main()
         //if(r.second){
             //知って�?る盤面ではなかっ�?
             //�?番に盤面を生成してqueueに追�?する
-            std::cout << "********poped State: *******  :  ";
-            print_state(s);
+            //std::cout << "********poped State: *******  :  ";
+            //print_state(s);
             for(int i = 0; i < n; ++i)
             {
                 int const plus = (i+coins[i])%n;
                 int const minus = n + (i-coins[i])%n-1;
-                std::cout << "plus:" << plus %n << std::endl;
-                std::cout << "minus:" << minus %n << std::endl;
+                //std::cout << "plus:" << plus %n << std::endl;
+                //std::cout << "minus:" << minus %n << std::endl;
                 std::vector<int> s_copy = s;
                 //std::vector<int> s_copy(n, 0);
                 
                 s_copy[plus%n] = (int)!(s_copy[plus] == 1);
                 if(plus!=minus)
                     s_copy[minus] = (int)!(s_copy[minus] == 1);
-                print_state(s_copy);
+                //print_state(s_copy);
                 states_q.push(s_copy);
                 
                 //std::cout << "*******" << i << "************" << std::endl;
