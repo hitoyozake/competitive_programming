@@ -29,7 +29,8 @@ fn main() {
         amari += v%2;
     }
 
-    sum += amari / 3;
+    sum += amari / 4;
+    
 
     println!("{}", sum );
 
