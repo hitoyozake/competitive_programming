@@ -20,4 +20,18 @@ fn main() {
             *hashMap.entry(i).or_insert(0) += 1;
         }
     }
+
+    let mut sum = 0;
+    let mut amari = 0;
+
+    for (k, v) in & hasMap {
+        sum += v/2;
+        amari += v%2;
+    }
+
+    sum += amari / 3;
+
+    println!("{}", sum );
+    )
+
 }
