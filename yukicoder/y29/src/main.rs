@@ -24,7 +24,7 @@ fn main() {
     let mut sum = 0;
     let mut amari = 0;
 
-    for (k, v) in & hasMap {
+    for (k, v) in & hashMap {
         sum += v/2;
         amari += v%2;
     }
@@ -32,6 +32,5 @@ fn main() {
     sum += amari / 3;
 
     println!("{}", sum );
-    )
 
 }
