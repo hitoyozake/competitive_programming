@@ -22,7 +22,7 @@ fn main() {
         
         let imod:i128 = i;
         
-        max = std::cmp::max(max, ((((nmod-imod+1))*(imod)) + (nmod-imod))%1000007);
+        max = std::cmp::max(max, ((((nmod-imod+1)%1000007)*(imod)) + (nmod-imod))%1000007);
     
     }
 
