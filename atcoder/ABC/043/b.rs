@@ -1,5 +1,6 @@
 
 
+
 // 標準入力一行を読み取り，指定の型に変換する関数
 fn read<T: std::str::FromStr>() -> T {
     let mut s = String::new();
