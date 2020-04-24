@@ -25,7 +25,7 @@ fn main(){
         let s: String = read();
         let mut smut = s.split_whitespace();
 
-        //
+        //質問より　色数は4200より上だと8色以外でも選択できるとのこと．
 
         for i in smut{
             let a: i64 = i.parse().unwrap();
