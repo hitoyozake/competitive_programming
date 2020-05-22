@@ -1,37 +1,36 @@
 #include <iostream>
 #include <set>
+#include <algorithm>
 
 int LIMIT = 100000 + 1;
-
-std::set<long long> make_set(){
-
-    long long x9 = 1;
-    long long x6 = 1;
-    std::set<long long> s;
-    for(int i = 0; i < 30; ++i){
-            s.insert(x9);
-            s.insert(x6);
-    }
-    return s;
-}
 
 
 int main(){
 
     int n = 0;
     std::cin >> n;
+    int min_count = 1000000;
+    
 
-    auto s = make_set();
+    for(int i = 0; i <= n; ++i){
+        int array[] = {i, n-i};
+        int sn[] = {6, 9};
+        auto count = 0;
+        
+        for(int j = 0; j < 2; ++j){
+           
+           while(array[j]>0){
+            count += array[j]%sn[j];
+            array[j] /= sn[j];
+           }
+        }
 
-    int count = 0;
+        min_count = std::min(count, min_count);
+     }
 
-    for(auto it = s.rbegin(); it != s.rend(); ++it){
 
-        count += n / *it;
-        n %= *it;
-    }
 
-    std::cout << count + n << std::endl;
+    std::cout << min_count  << std::endl;
 
     return 0;
 
