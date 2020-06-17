@@ -4,10 +4,8 @@
 #include <map>
  
 long long cnt(long long x){
-    if(x==1){
-        return x;
-    }
-    return x + cnt(x-1);
+    
+    return x * (x-1) / 2;
 }
 
 int main(){
@@ -15,25 +13,26 @@ int main(){
   long long int n = 0;
   std::cin >> n;
   
-  std::map<std::set<char>, long long int> mp;
-  
+
+    std::map<char, long long int> ttmp;
+  std::map<decltype(ttmp), long long > mp2;
+
   for(int i = 0; i < n ; ++i){
+    
+    std::map<char, long long int> mp;
   	std::string t;
     std::cin >> t;
     
-    std::set<char> cs;
-    
     for(auto c: t){
-      cs.insert(c);
+      mp[c]++;
     }
+
+    mp2[mp]++;
   
-    mp[cs]++;
   }
   long long count = 0;
-  for(auto m: mp){
-    if(m.second >= 2){
-    	count += cnt(m.second-1);
-    }
+  for(auto m: mp2){
+    	count += cnt(m.second);
   }
   
   std::cout << count << std::endl;
