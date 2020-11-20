@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 
 fn read<T: std::str::FromStr>() -> T {
     let mut s = String::new();
@@ -15,7 +15,7 @@ fn main() {
         (iter.next().unwrap().parse::<i64>().unwrap(), iter.next().unwrap().parse::<i64>().unwrap())
     };
 
-    let mut hash:HashMap<i64, i64> = HashMap::new();
+    let mut hash:BTreeMap<i64, i64> = BTreeMap::new();
 
     for i in 0..n {
         let (x, y) = {
