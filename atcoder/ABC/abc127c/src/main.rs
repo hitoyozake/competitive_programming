@@ -27,5 +27,10 @@ fn main() {
        mx = max(mx, a);
     }
 
-    println!("{}", mn-mx);
+    if mn-mx >= 0 {
+    println!("{}", mn-mx+1);
+    } else{
+        println!("{}", 0);
+    }
+
 }
