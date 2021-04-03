@@ -9,14 +9,14 @@ std::vector<std::pair<int, std::string>>  counting( std::string const & s ){
     std::vector<std::pair<int, std::string>> result;
     for(int i = 1; i < s.size(); ++i){
         if(s[current]!=s[i]){
-            result.push_back({count, std::string(s[current], 1)});
+            result.push_back({count, std::string(1, s[current])});
             current = i;
             count = 1;
         }else{
             ++count;
         }
     }
-    result.push_back({count, std::string(s[current], 1)});
+    result.push_back({count, std::string(1, s[current])});
     return result;
 }
 
